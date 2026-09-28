@@ -14,11 +14,7 @@ jobs:
         run: npm --prefix backend install
       - name: Install frontend
         run: npm --prefix frontend install
-      - name: Backend tests
-        run: npm --prefix backend test
-      - name: Frontend tests
-        run: npm --prefix frontend test -- --run
-      - name: Backend dependency audit
-        run: npm --prefix backend audit --audit-level=high
-      - name: Frontend dependency audit
-        run: npm --prefix frontend audit --audit-level=high
+      - name: Test
+        run: npm test
+      - name: Dependency audit
+        run: npm run audit
