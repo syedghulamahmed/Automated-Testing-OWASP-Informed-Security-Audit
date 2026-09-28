@@ -1,0 +1,7 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+enum Role { STUDENT COMPANY ADMIN }
+model User { id String @id @default(uuid()) email String @unique passwordHash String role Role isActive Boolean @default(true) createdAt DateTime @default(now()) student Student? company Company? }
+model Student { id String @id @default(uuid()) userId String @unique name String resumeUrl String? createdAt DateTime @default(now()) user User @relation(fields:[userId],references:[id],onDelete:Cascade) }
+model Company { id String @id @default(uuid()) userId String @unique name String logoUrl String? createdAt DateTime @default(now()) user User @relation(fields:[userId],references:[id],onDelete:Cascade) internships Internship[] }
+model Internship { id String @id @default(uuid()) companyId String title String description String location String category String createdAt DateTime @default(now()) company Company @relation(fields:[companyId],references:[id],onDelete:Cascade) @@index([location]) @@index([category]) @@index([createdAt]) @@index([companyId,createdAt]) }
