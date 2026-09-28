@@ -1,0 +1,1 @@
+{"name":"talentbridge-week5","private":true,"scripts":{"test":"npm --prefix backend test && npm --prefix frontend test -- --run","audit":"npm --prefix backend audit --audit-level=high && npm --prefix frontend audit --audit-level=high"},"engines":{"node":">=20"}}
