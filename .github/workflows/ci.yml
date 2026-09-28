@@ -1,0 +1,24 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install backend
+        run: npm --prefix backend install
+      - name: Install frontend
+        run: npm --prefix frontend install
+      - name: Backend tests
+        run: npm --prefix backend test
+      - name: Frontend tests
+        run: npm --prefix frontend test -- --run
+      - name: Backend dependency audit
+        run: npm --prefix backend audit --audit-level=high
+      - name: Frontend dependency audit
+        run: npm --prefix frontend audit --audit-level=high
